@@ -19,6 +19,9 @@ jobs:
           set -euo pipefail
           test -f README.md
           test -f docs/SYSTEM_BOUNDARY.md
+          test -f docs/CONNECTOR_BOUNDARY.md
+          grep -q "five-minute replay window" docs/CONNECTOR_BOUNDARY.md
+          grep -q "deterministic code" docs/CONNECTOR_BOUNDARY.md
           if grep -RInE '(api[_-]?key|secret|password)[[:space:]]*[:=][[:space:]]*[^$<{[:space:]]' . --exclude-dir=.git --exclude='*.md' --exclude='*.yml'; then
             echo 'Potential committed credential detected.'
             exit 1
